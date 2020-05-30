@@ -3,69 +3,41 @@ import 'package:flutter/material.dart';
 class Menu extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
-    return Container(
-      color: Color(0xffF2F2F2),
-      width: MediaQuery.of(context).size.width * 0.2,
-      height: MediaQuery.of(context).size.height,
-      child: Center(
-        child: Column(
-          crossAxisAlignment: CrossAxisAlignment.start,
-          children: <Widget>[
-            SizedBox(
-              height: 131,
-            ),
-            Text(
-              "Main",
-              style: TextStyle(
-                  color: Color(0xff707070),
-                  fontSize: 22,
-                  fontWeight: FontWeight.bold),
-            ),
-            SizedBox(
-              height: 27,
-            ),
-            Text(
-              "About me",
-              style: TextStyle(
-                  color: Color(0xff000000),
-                  fontSize: 18,
-                  fontWeight: FontWeight.bold),
-            ),
-            SizedBox(
-              height: 27,
-            ),
-            Text(
-              "My Works",
-              style: TextStyle(
-                  color: Color(0xff000000).withOpacity(0.6), fontSize: 18),
-            ),
-            SizedBox(
-              height: 27,
-            ),
-            Text(
-              "My Skills",
-              style: TextStyle(
-                  color: Color(0xff000000).withOpacity(0.6), fontSize: 18),
-            ),
-            SizedBox(
-              height: 27,
-            ),
-            Text(
-              "My Clients",
-              style: TextStyle(
-                  color: Color(0xff000000).withOpacity(0.6), fontSize: 18),
-            ),
-            SizedBox(
-              height: 27,
-            ),
-            Text(
-              "Send me a message",
-              style: TextStyle(
-                  color: Color(0xff000000).withOpacity(0.6), fontSize: 18),
-            ),
-          ],
-        ),
+    return NavigationRail(
+      backgroundColor: Color(0xffF2F2F2),
+      selectedIndex: 1,
+      extended: true,
+      onDestinationSelected: (index) {},
+      unselectedLabelTextStyle: TextStyle(
+        color: Color(0xff000000).withOpacity(0.6),
+        fontSize: 18,
       ),
+      selectedLabelTextStyle: TextStyle(
+        color: Color(0xff707070),
+        fontSize: 22,
+      ),
+      destinations: [
+        NavigationRailDestination(
+          label: Text("Main"),
+          icon: Icon(Icons.home),
+        ),
+        NavigationRailDestination(
+          label: Text("About Me"),
+          icon: Icon(Icons.info),
+        ),
+        NavigationRailDestination(
+          label: Text("My Works"),
+          icon: Icon(Icons.dashboard),
+        ),
+        NavigationRailDestination(
+          label: Text("My Skills"),
+          icon: Icon(Icons.list),
+        ),
+        NavigationRailDestination(
+          label: Text("Send me a message"),
+          icon: Icon(Icons.message),
+        ),
+      ],
     );
   }
 }
