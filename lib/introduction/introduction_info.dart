@@ -19,7 +19,10 @@ class IntroductionInfo extends StatelessWidget {
               )
             ],
           ),
-          ActionButton()
+          ActionButton(
+            title: "Hire Me",
+            onPressed: () {},
+          )
         ],
       ),
     );
