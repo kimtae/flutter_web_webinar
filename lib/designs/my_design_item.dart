@@ -7,7 +7,6 @@ class MyDesignItem extends StatelessWidget {
   final String imageUrl;
   final String date;
   final Function() onPressed;
-  final bool isImageFirst;
 
   const MyDesignItem({
     Key key,
@@ -16,22 +15,19 @@ class MyDesignItem extends StatelessWidget {
     this.imageUrl,
     this.date,
     this.onPressed,
-    this.isImageFirst = true,
   }) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
     return Row(
       children: <Widget>[
-        if (isImageFirst) ...[buildImage(context), buildInfo()],
-        if (!isImageFirst) ...[buildInfo(), buildImage(context)],
+        buildImage(context), buildInfo(),
       ],
     );
   }
 
   Widget buildInfo() {
     return Expanded(
-      flex: 5,
       child: Padding(
         padding: const EdgeInsets.all(32.0),
         child: Column(
@@ -67,13 +63,10 @@ class MyDesignItem extends StatelessWidget {
   }
 
   Widget buildImage(BuildContext context) {
-    return Expanded(
-      flex: 6,
-      child: Image.network(
-        imageUrl,
-        height: 300,
-        fit: BoxFit.cover,
-      ),
+    return Image.network(
+      imageUrl,
+      height: 300,
+      fit: BoxFit.cover,
     );
   }
 }
