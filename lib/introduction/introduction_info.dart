@@ -1,36 +1,59 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_webinar/others/action_button.dart';
+import 'package:responsive_builder/responsive_builder.dart';
 
 class IntroductionInfo extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
-    return Container(
-      height: MediaQuery.of(context).size.height,
-      child: Column(
-        children: <Widget>[
-          Row(
-            crossAxisAlignment: CrossAxisAlignment.start,
-            children: <Widget>[
-              Expanded(
-                child: _buildInformation(),
-              ),
-              Expanded(
-                child: _buildImage(),
-              )
-            ],
-          ),
-          ActionButton(
-            title: "Hire Me",
-            onPressed: () {},
-          )
-        ],
+    return ScreenTypeLayout.builder(
+      mobile: (context) => _buildMobileIntroduction(context),
+      desktop: (context) => _buildDesktopIntroduction(context),
+    );
+  }
+
+  Widget _buildMobileIntroduction(BuildContext context) {
+    return Column(
+      crossAxisAlignment: CrossAxisAlignment.stretch,
+      children: <Widget>[
+        _buildImage(true),
+        _buildInformation(true),
+        Padding(
+          padding: const EdgeInsets.all(8.0),
+          child: _buildButton(),
+        )
+      ],
+    );
+  }
+
+  Widget _buildDesktopIntroduction(BuildContext context) {
+    return ConstrainedBox(
+      constraints: BoxConstraints(
+        minHeight: MediaQuery.of(context).size.height,
+      ),
+      child: Container(
+        child: Column(
+          children: <Widget>[
+            Row(
+              crossAxisAlignment: CrossAxisAlignment.start,
+              children: <Widget>[
+                Expanded(
+                  child: _buildInformation(false),
+                ),
+                Expanded(
+                  child: _buildImage(false),
+                )
+              ],
+            ),
+            _buildButton()
+          ],
+        ),
       ),
     );
   }
 
-  Widget _buildImage() {
+  Widget _buildImage(isMobile) {
     return Padding(
-      padding: EdgeInsets.symmetric(vertical: 72),
+      padding: EdgeInsets.symmetric(vertical: isMobile ? 16 : 72),
       child: Image.network(
         "https://scontent.fktm10-1.fna.fbcdn.net/v/t1.0-9/84211905_628036967932484_411665661769547776_o.jpg?_nc_cat=105&_nc_sid=e3f864&_nc_ohc=slTOSDpiYhkAX8_5VmB&_nc_ht=scontent.fktm10-1.fna&oh=3c5f69f25ccf7eaf5fa4f24a75700ac1&oe=5EF4638B",
         height: 400,
@@ -39,9 +62,10 @@ class IntroductionInfo extends StatelessWidget {
     );
   }
 
-  Widget _buildInformation() {
+  Widget _buildInformation(isMobile) {
     return Padding(
-      padding: EdgeInsets.symmetric(horizontal: 64, vertical: 72),
+      padding: EdgeInsets.symmetric(
+          horizontal: isMobile ? 16 : 64, vertical: isMobile ? 8 : 72),
       child: Column(
         crossAxisAlignment: CrossAxisAlignment.start,
         children: <Widget>[
@@ -59,6 +83,13 @@ class IntroductionInfo extends StatelessWidget {
           ),
         ],
       ),
+    );
+  }
+
+  Widget _buildButton() {
+    return ActionButton(
+      title: "Hire Me",
+      onPressed: () {},
     );
   }
 }

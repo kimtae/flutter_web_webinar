@@ -1,12 +1,21 @@
 import 'package:flutter/material.dart';
+import 'package:responsive_builder/responsive_builder.dart';
 
 class Menu extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
+    return ResponsiveBuilder(
+      builder: (context, sizingInformation){
+        return _buildMenu(sizingInformation.isDesktop);
+      },
+    );
+  }
+
+  Widget _buildMenu(bool isExtended){
     return NavigationRail(
       backgroundColor: Color(0xffF2F2F2),
       selectedIndex: 1,
-      extended: true,
+      extended: isExtended,
       onDestinationSelected: (index) {},
       unselectedLabelTextStyle: TextStyle(
         color: Color(0xff000000).withOpacity(0.6),
